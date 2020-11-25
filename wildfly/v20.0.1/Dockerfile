@@ -6,12 +6,17 @@ RUN mv -f /opt/bitnami /opt/jboss
 
 
 RUN cp -rf /opt/jboss/wildfly/standalone /opt/jboss/wildfly/standalone.bak
-RUN mkdir -p /opt/jboss/wildfly/modules/com/mysql/main
-RUN mkdir -p /opt/jboss/wildfly/modules/com/mariadb/main
+RUN mkdir -p /opt/jboss/wildfly/modules/com/mysql/main/
+
+#RUN mkdir -p /opt/jboss/wildfly/modules/org/mariadb/jdbc/main
+RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/org/mariadb/jdbc/main
 
 COPY payload/startup.sh /opt/jboss/wildfly/bin/
 COPY payload/mysql/* /opt/jboss/wildfly/modules/com/mysql/main/
-COPY payload/mariadb/* /opt/jboss/wildfly/modules/com/mariadb/main/
+
+# COPY payload/mariadb/* /opt/jboss/wildfly/modules/org/mariadb/jdbc/main/
+COPY payload/mariadb/* /opt/jboss/wildfly/modules/system/layers/base/org/mariadb/jdbc/main/
+
 
 COPY payload/camunda/modules /opt/jboss/wildfly/modules/
 COPY payload/camunda/camunda-engine-rest-7.14.0-ee-wildfly.war /opt/jboss/wildfly/standalone/deployments
