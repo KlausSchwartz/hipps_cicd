@@ -61,7 +61,8 @@ RUN locale-gen
 # && yum -y install iproute \
 # && yum -y upgrade
  
-RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+#RUN echo alias ll='ls -l --color=auto' >> /etc/profile
+RUN echo alias ll="ls -l --color=auto" >> /etc/profile
 RUN touch /.bash_history \
  && cp /root/.bash* / \
  && chown -R :0 /.bash* \
